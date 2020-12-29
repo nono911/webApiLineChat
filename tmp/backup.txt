@@ -1,0 +1,51 @@
+/*  listener = */ listenerarray.push(ref.limitToLast(1).on('child_added',function(oncarinsurance) {
+
+        ref.once('value',function(snapshot) {
+
+
+
+
+          var nkey ;
+          var btime ;
+          var etime ;
+          var deviceId ="";
+          console.log(`snapshot : ${ snapshot.key }`);
+
+          snapshot.forEach(userSnapshot => {
+              nkey = userSnapshot.key;
+              btime = userSnapshot.val().btime;
+              etime = userSnapshot.val().etime;
+              deviceId = userSnapshot.val().deviceid;
+              console.log("Device ID " + deviceId);
+
+          })
+           var tinfo = btime;
+           if (btime != etime)
+           {
+               tinfo = btime + " <--> " + etime;
+           }
+           // find userid
+
+           getUserId(deviceID, function (err, result) {
+              userId = result;
+
+           });
+            console.log("User ID " + userId);
+        /*
+         getReplyToken(deviceId, function (err, result) {
+            userId = result;
+            console.log("User ID " + userId);
+         });
+        */
+         //console.log("User ID 2 " + userId);
+
+         if( botReplymessage(replyToken," ###### time start car insurance --> " + tinfo + "######",userId)==false)
+         {
+          // console.log("Push " + userId);
+          // botsendmessage(userId,  " ###### time start car insurance --> " + tinfo + "######" );
+         }
+
+          //  botsendmessage(userId,  " ###### time start car insurance --> " + tinfo + "######" );
+        //    bot.pushTextMessage(userId,  " ###### time start car insurance --> " + tinfo + "######" );
+
+       });
